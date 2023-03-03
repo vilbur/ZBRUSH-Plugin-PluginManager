@@ -8,6 +8,7 @@ Class Plugin
 	name	:= ""
 	path_source	:= ""
 	path_zbrush	:= ""
+	installed	:= false
 	
 	suffixes	:= [".zsc", ".txt", "Data"]
 
@@ -28,9 +29,11 @@ Class Plugin
 		$zsc_file := this._getPath(this.path_source, ".zsc")
 		
 		if( FileExist($zsc_file) )
-		
+		{
 			this._createHardlinks()
-		
+			
+			this.installed := true
+		}
 		else
 			MsgBox,262144, PATH ERROR, % "Plugin " this.name " could not be installed.`n`nMAIN FILE IS MISSING:`n`n" $zsc_file
 	}

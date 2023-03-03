@@ -13,7 +13,8 @@ Class ScriptFileGenerator
 
 	ButtonGenerator := new ButtonGenerator(96, 48)
 	
-	__New( $file ){
+	__New( $file )
+	{
 		this.file := $file
 		;MsgBox,262144,, ScriptFileGenerator, 2
 		
@@ -35,11 +36,9 @@ Class ScriptFileGenerator
 	create()
 	{
 		FileDelete, % this.file
-
 		
 		this.writeMenu()
 		this.writeSubMenu()
-
 	}
 	
 	/**

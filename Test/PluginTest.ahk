@@ -7,8 +7,8 @@
 $Plugin := new Plugin( A_WorkingDir "\FooPlugin")
 
 
-;$Plugin.install("C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64")
+$Plugin.install("C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64")
 
 
-;MsgBox,262144,, % $Plugin.path_source, 2
-MsgBox,262144,, % $Plugin.name, 2
+;MsgBox,262144,, % $Plugin.path_source
+;MsgBox,262144,, % $Plugin.name

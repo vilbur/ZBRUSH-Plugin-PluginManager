@@ -11,36 +11,25 @@ Class PluginManager
 	
 	ScriptFileGenerator := new ScriptFileGenerator()
 	
-	plugins_source	:= "C:\GoogleDrive\ProgramsData\CG\ZBrush\Plugins"
-	plugins_zbrush	:= "C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64"
+	plugins_source	:= ""
+	plugins_zbrush	:= ""
 
-	plugins	:= []
-	suffixes	:= [".zsc", ".txt", "Data"]
+	Plugins	:= []
 	
 
-	__New()
+	__New( $plugins_source, $plugins_zbrush )
 	{
-		;this.parameter := $parameter
-		;MsgBox,262144,, PluginManager, 2
+		this.plugins_source := $plugins_source
+		this.plugins_zbrush := $plugins_zbrush
 		
-		;this.plugins.push("A", "B")
-
-		
-		this._getPluginsInFolder()
-		
-		this._installPlugins()
-		
-		;this._uninstallPlugins()
-		
-		;this.ScriptFileGenerator.file := "Reload-Plugins.txt"
-		;
-		;this.ScriptFileGenerator.menu	:= "~PluginManager"
-		;this.ScriptFileGenerator.submenu	:= "Reload-Plugins"
-		;
-		;this.ScriptFileGenerator.create()
-		;
-		;For $index, $plugin in this.plugins
-		;	this.ScriptFileGenerator.writeScriptLoadButton($plugin)
+		if( FileExist($plugins_source) && FileExist($plugins_zbrush) )
+			this._getPluginsInFolder()
+			
+		else if( ! FileExist($plugins_source) )
+			MsgBox,262144, PATH ERROR, % "PLUGIN SOURCE DIRECTORY DOES NOT EXISTS:`n`n" $plugins_source
+			
+		else if( ! FileExist($plugins_zbrush) )
+			MsgBox,262144, PATH ERROR, % "PLUGIN INSTALL DIRECTORY DOES NOT EXISTS:`n`n" $plugins_zbrush
 		
 	}
 	
@@ -48,8 +37,24 @@ Class PluginManager
 	 */
 	_installPlugins()
 	{
-		For $index, $Plugin in this.plugins
+		For $index, $Plugin in this.Plugins
 			$Plugin.install(this.plugins_zbrush)
+	}
+	
+	/** Create Hardlinks to Zbrush\Zplugs64
+	 */
+	_createReloadScript()
+	{
+		this.ScriptFileGenerator.file := "Reload-Plugins.txt"
+		
+		this.ScriptFileGenerator.menu	:= "~PluginManager"
+		this.ScriptFileGenerator.submenu	:= "Plugins"
+		
+		this.ScriptFileGenerator.create()
+		
+		For $index, $Plugin in this.plugins
+			if( $Plugin.installed )
+				this.ScriptFileGenerator.writeScriptLoadButton( $Plugin._getPath( this.plugins_zbrush, ".txt" ) )
 	}
 	
 	/**
@@ -57,7 +62,7 @@ Class PluginManager
 	_getPluginsInFolder()
 	{
 		Loop, Files, % this.plugins_source "\*.*", D
-			this.plugins.push( new Plugin(A_LoopFileFullPath) )
+			this.Plugins.push( new Plugin(A_LoopFileFullPath) )
 	}
 	
 	/**
@@ -103,21 +108,11 @@ Class PluginManager
 		return RegExMatch( $objExec_result, "<SYMLINKD*>\s+" $dir_name ) ? 1 : 0
 	}
 
-	/**
-	 */
-	sanitizeBackslashes( $path )
-	{
-		return % RegExReplace( $path, "/", "\") ;"
-	}
-	
 }
 
 
-;/* CALL CLASS FUNCTION
-;*/
-;PluginManager($parameter:="value"){
-;	return % new PluginManager($parameter)
-;}
-;/* EXECUTE CALL CLASS FUNCTION
-;*/
-;PluginManager()
+$PluginManager := new PluginManager("C:\GoogleDrive\ProgramsData\CG\ZBrush\Plugins", "C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64")
+
+$PluginManager._installPlugins()
+		
+$PluginManager._createReloadScript()

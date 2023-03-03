@@ -9,7 +9,7 @@ Class ScriptFileGenerator
 	menu	:= ""
 	submenu	:= ""
 
-	ButtonGenerator := new ButtonGenerator(96, 48)
+	ButtonGenerator := new ButtonGenerator(128, 48)
 	
 	__New( $file )
 	{
@@ -66,7 +66,7 @@ Class ScriptFileGenerator
 	writeSubMenu()
 	{
 		if( this.submenu != "" )
-			FileAppend, % "`n[ISubPalette, """ this.submenu """]",	% this.file
+			FileAppend, % "`n[ISubPalette, """ this.menu ":" this.submenu """]",	% this.file
 	}
 }
 

@@ -38,6 +38,8 @@ Class PluginManager
 	 */
 	_installPlugins()
 	{
+		;this._removeHardlinks()
+		
 		For $index, $Plugin in this.Plugins
 			$Plugin.install(this.plugins_zbrush)
 	}
@@ -49,7 +51,7 @@ Class PluginManager
 		this.ScriptFileGenerator.file := this.plugins_zbrush "\Reload-Plugins.txt"
 		
 		this.ScriptFileGenerator.menu	:= "~PluginManager"
-		this.ScriptFileGenerator.submenu	:= "Plugins"
+		this.ScriptFileGenerator.submenu	:= "Load Plugins"
 		
 		this.ScriptFileGenerator.create()
 		
@@ -66,9 +68,9 @@ Class PluginManager
 			this.Plugins.push( new Plugin(A_LoopFileFullPath) )
 	}
 	
-	/**
+	/** THIS TAKE SO LONG TIME
 	 */
-	_uninstallPlugins()
+	_removeHardlinks()
 	{
 		Loop, Files, % this.plugins_zbrush "\*.*"
 			if( this._isHardlink( A_LoopFileFullPath ) )
@@ -110,6 +112,8 @@ Class PluginManager
 	}
 
 }
+$timestamp := A_TickCount
+
 
 
 $PluginManager := new PluginManager("C:\GoogleDrive\ProgramsData\CG\ZBrush\Plugins", "C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64")
@@ -117,3 +121,8 @@ $PluginManager := new PluginManager("C:\GoogleDrive\ProgramsData\CG\ZBrush\Plugi
 $PluginManager._installPlugins()
 		
 $PluginManager._createReloadScript()
+
+;$time := A_TickCount - $timestamp
+$time := Round((A_TickCount - $timestamp) / 1000, 1)
+;MsgBox,262144,time, %$time%,3
+

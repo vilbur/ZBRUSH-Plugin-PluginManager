@@ -33,8 +33,8 @@ Class Plugin
 			
 			this.installed := true
 		}
-		else
-			MsgBox,262144, PATH ERROR, % "Plugin " this.name " could not be installed.`n`nMAIN FILE IS MISSING:`n`n" $zsc_file
+		;else
+			;MsgBox,262144, PATH ERROR, % "Plugin " this.name " could not be installed.`n`nMAIN FILE IS MISSING:`n`n" $zsc_file
 	}
 	
 	/**

@@ -25,14 +25,24 @@
 [IButton,  [StrMerge, $CONTROLS_PATH, "Install Plugins"], "",
 	//[VarSet, file_path, [FileNameResolvePath, "PluginCompilerData\Create-Compile-Script.ahk"] ]	
 	//[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\test.ahk"] ]	
-	[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\Install-Plugins.ahk"] ]	
+	[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\PluginManager.ahk"] ]	
 	[FileExecute, $ZFILE_UTILS_DLL, "LaunchAppWithFile",  #file_path]
 	
-	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
 	
-	[IPress, ZScript:Load]
-
-	[Note, "Scripts installed" ]
+	[Sleep, 3]
+	
+	//[Note,  [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"] ]
+	
+	//[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
+	//
+	//[IPress, ZScript:Load]
+	//
+	//[Note, "Scripts installed" ]
+	
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
 
-//[ISubPalette, [StrMerge, $PLUGIN_NENU, ":", $PLUGIN_SUBMENU ] ]
+[IButton,  [StrMerge, $CONTROLS_PATH, "Reload Plugins"], "",
+	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
+	
+	[IPress, ZScript:Load]	
+,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]

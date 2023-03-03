@@ -20,10 +20,10 @@ Class HardLinkCreator
 		
 		if( FileExist($path_source) )
 		{		
-			this._deleteOldLink( $path_source, $is_folder )
+			this._deleteOldLink( $path_link, $is_folder )
 			
 			$mklink	:= "mklink " $file_or_folder " """ $path_link """ """ $path_source """"
-			
+			;MsgBox,262144,mklink, %$mklink%
 			RunWait %comspec% /c %$mklink%,,Hide
 		}
 	}

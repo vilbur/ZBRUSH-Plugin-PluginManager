@@ -1,6 +1,7 @@
 #SingleInstance force
 
 #Include %A_LineFile%\..\ScriptFileGenerator.ahk
+#Include %A_LineFile%\..\Plugin.ahk
 
 
 /** Class PluginManager
@@ -17,7 +18,8 @@ Class PluginManager
 	suffixes	:= [".zsc", ".txt", "Data"]
 	
 
-	__New(){
+	__New()
+	{
 		;this.parameter := $parameter
 		;MsgBox,262144,, PluginManager, 2
 		
@@ -26,34 +28,28 @@ Class PluginManager
 		
 		this._getPluginsInFolder()
 		
-		;this._installPlugins()
+		this._installPlugins()
 		
 		;this._uninstallPlugins()
 		
-		this.ScriptFileGenerator.file := "Reload-Plugins.txt"
-		
-		this.ScriptFileGenerator.menu	:= "~PluginManager"
-		this.ScriptFileGenerator.submenu	:= "Reload-Plugins"
-		
-		this.ScriptFileGenerator.create()
-		
-		For $index, $plugin in this.plugins
-			this.ScriptFileGenerator.writeScriptLoadButton($plugin)
+		;this.ScriptFileGenerator.file := "Reload-Plugins.txt"
+		;
+		;this.ScriptFileGenerator.menu	:= "~PluginManager"
+		;this.ScriptFileGenerator.submenu	:= "Reload-Plugins"
+		;
+		;this.ScriptFileGenerator.create()
+		;
+		;For $index, $plugin in this.plugins
+		;	this.ScriptFileGenerator.writeScriptLoadButton($plugin)
 		
 	}
-	
 	
 	/** Create Hardlinks to Zbrush\Zplugs64
 	 */
 	_installPlugins()
 	{
-		;$plugins := this.plugins
-		
-		For $index, $plugin_path in this.plugins
-			For $index, this.suffixes in [".zsc", ".txt", "Data" ]
-				createHardlink( $plugin_path, $suffix )
-			;MsgBox,262144,plugin, %$plugin%,3
-		
+		For $index, $Plugin in this.plugins
+			$Plugin.install(this.plugins_zbrush)
 	}
 	
 	/**
@@ -61,7 +57,7 @@ Class PluginManager
 	_getPluginsInFolder()
 	{
 		Loop, Files, % this.plugins_source "\*.*", D
-			this.plugins.push( this.sanitizeBackslashes(A_LoopFileFullPath))
+			this.plugins.push( new Plugin(A_LoopFileFullPath) )
 	}
 	
 	/**
@@ -91,37 +87,6 @@ Class PluginManager
 	}
 	
 	
-
-	/** CREATE HARDLINKS TOS ZBRUSH
-	 */
-	createHardlink( $path_source, $path_link )
-	{
-		;$is_folder := InStr( FileExist($path_source), "D" ) != 0
-		;
-		;$file_or_folder	:= $is_folder ? "/d" : ""
-		;
-		;;$path_source	:= RegExReplace( $path_source, "/", "\") ;"
-		;;$path_link	:= RegExReplace( $path_link, "/", "\") ;"
-		;
-		;
-		;if( FileExist($path_source) )
-		;{		
-		;	if( $is_folder  )
-		;		FileRemoveDir, %$path_link%
-		;	
-		;	else
-		;		FileDelete, %$path_link%
-		;	
-		;	$mklink	:= "mklink " $file_or_folder " """ $path_link """ """ $path_source """"
-		;	
-		;	RunWait %comspec% /c %$mklink%,,Hide
-		;	
-		;}
-		;else
-		;	MsgBox,262144, PATH ERROR, % "SOURCE PATH FOR HARDLINK IS MISSING:`n`n" $path_source
-	}
-	
-	
 	/** isHardlink
 	 */
 	_isHardlink( $path )
@@ -146,11 +111,13 @@ Class PluginManager
 	}
 	
 }
-/* CALL CLASS FUNCTION
-*/
-PluginManager($parameter:="value"){
-	return % new PluginManager($parameter)
-}
-/* EXECUTE CALL CLASS FUNCTION
-*/
-PluginManager()
+
+
+;/* CALL CLASS FUNCTION
+;*/
+;PluginManager($parameter:="value"){
+;	return % new PluginManager($parameter)
+;}
+;/* EXECUTE CALL CLASS FUNCTION
+;*/
+;PluginManager()

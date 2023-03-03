@@ -80,11 +80,11 @@ Class ScriptFileGenerator
 ;}
 
 
-/* EXECUTE CALL CLASS FUNCTION
-*/
-
-$ScriptFileGenerator := new ScriptFileGenerator("test-script.txt")
-
-$ScriptFileGenerator.menu := "Test"
-
-$ScriptFileGenerator.create()
+;/* EXECUTE CALL CLASS FUNCTION
+;*/
+;
+;$ScriptFileGenerator := new ScriptFileGenerator("test-script.txt")
+;
+;$ScriptFileGenerator.menu := "Test"
+;
+;$ScriptFileGenerator.create()

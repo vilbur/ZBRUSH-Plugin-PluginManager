@@ -1,5 +1,3 @@
-#SingleInstance force
-
 #Include %A_LineFile%\..\ButtonGenerator.ahk
 
 /** Class ScriptFileGenerator

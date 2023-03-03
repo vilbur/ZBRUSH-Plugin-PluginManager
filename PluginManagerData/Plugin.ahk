@@ -1,6 +1,3 @@
-#SingleInstance force
-
-
 /** Class Plugin
 */
 Class Plugin
@@ -12,6 +9,8 @@ Class Plugin
 	
 	suffixes	:= [".zsc", ".txt", "Data"]
 
+	HardLinkCreator	:= new HardLinkCreator()
+	
 	__New( $path_source )
 	{
 		this.path_source := $path_source
@@ -53,29 +52,7 @@ Class Plugin
 	{
 		;if( FileExist($path_link) == "D" )
 		For $index, $suffix in this.suffixes
-			this._createHardlink( this._getPath(this.path_source, $suffix), this._getPath(this.path_zbrush, $suffix) )
-	}
-	
-	/** CREATE HARDLINKS TOS ZBRUSH
-	 */
-	_createHardlink( $path_source, $path_link )
-	{
-		$is_folder := InStr( FileExist($path_source), "D" ) != 0
-		
-		$file_or_folder	:= $is_folder ? "/d" : ""
-		
-		if( FileExist($path_source) )
-		{		
-			if( $is_folder  )
-				FileRemoveDir, %$path_link%
-			
-			else
-				FileDelete, %$path_link%
-			
-			$mklink	:= "mklink " $file_or_folder " """ $path_link """ """ $path_source """"
-			
-			RunWait %comspec% /c %$mklink%,,Hide
-		}
+			this.HardLinkCreator.createHardlink( this._getPath(this.path_source, $suffix), this._getPath(this.path_zbrush, $suffix) )
 	}
 	
 	/**

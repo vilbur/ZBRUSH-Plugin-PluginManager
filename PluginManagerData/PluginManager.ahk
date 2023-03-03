@@ -2,15 +2,16 @@
 
 #Include %A_LineFile%\..\ScriptFileGenerator.ahk
 #Include %A_LineFile%\..\Plugin.ahk
-
+#Include %A_LineFile%\..\HardLinkCreator.ahk
 
 /** Class PluginManager
 */
 Class PluginManager
 {
 	
-	ScriptFileGenerator := new ScriptFileGenerator()
-	
+	ScriptFileGenerator	:= new ScriptFileGenerator()
+	HardLinkCreator 	:= new HardLinkCreator()
+
 	plugins_source	:= ""
 	plugins_zbrush	:= ""
 
@@ -45,7 +46,7 @@ Class PluginManager
 	 */
 	_createReloadScript()
 	{
-		this.ScriptFileGenerator.file := "Reload-Plugins.txt"
+		this.ScriptFileGenerator.file := this.plugins_zbrush "\Reload-Plugins.txt"
 		
 		this.ScriptFileGenerator.menu	:= "~PluginManager"
 		this.ScriptFileGenerator.submenu	:= "Plugins"

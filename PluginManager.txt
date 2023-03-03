@@ -28,10 +28,11 @@
 	[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\Install-Plugins.ahk"] ]	
 	[FileExecute, $ZFILE_UTILS_DLL, "LaunchAppWithFile",  #file_path]
 	
-	//[Note, $PLUGIN_DATA_PATH ]
-	[FileNameSetNext, [StrMerge, $PLUGIN_DATA_PATH, "\Reload-Plugins.txt"]]
+	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
+	
 	[IPress, ZScript:Load]
 
+	[Note, "Scripts installed" ]
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
 
 //[ISubPalette, [StrMerge, $PLUGIN_NENU, ":", $PLUGIN_SUBMENU ] ]

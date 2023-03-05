@@ -45,10 +45,12 @@ Class ScriptFileGenerator
 	{
 		SplitPath, $script_path, $script_name, $script_dir, $script_ext, $script_noext, $script_drive
 
-		$load_command := "[FileNameSetNext, """ $script_path """]"
+		$load_command := "[Note, ""Script " $script_name " will be reloaded""]"
+		$load_command .= "`n	[FileNameSetNext, """ $script_path """]"
 		$load_command .= "`n	[IPress, ZScript:Load]"
 		
 		$button := this.ButtonGenerator.create( this.menu ":" this.submenu ":" $script_noext, $load_command, "Reload " $script_name )
+		
 		
 		FileAppend, %$button%,	% this.file
 	}

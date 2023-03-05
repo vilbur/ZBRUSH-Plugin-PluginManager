@@ -112,9 +112,9 @@ Class PluginManager
 	}
 
 }
-$timestamp := A_TickCount
 
 
+;$timestamp := A_TickCount
 
 $PluginManager := new PluginManager("C:\GoogleDrive\ProgramsData\CG\ZBrush\Plugins", "C:\Program Files\Pixologic\ZBrush 2022\ZStartup\ZPlugs64")
 

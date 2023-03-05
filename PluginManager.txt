@@ -2,7 +2,7 @@
   *
   */
 [VarSet, $PLUGIN_NAME, 	"PluginManager"]
-[VarSet, $PLUGIN_SUBMENU, 	"Run-Plugin"]
+//[VarSet, $PLUGIN_SUBMENU, 	"Run-Plugin"]
   
   
 [VarSet, $PLUGIN_NENU,	[StrMerge, "~", $PLUGIN_NAME ]]
@@ -22,7 +22,7 @@
 [IPalette, $PLUGIN_NENU ]
 
 
-[IButton,  [StrMerge, $CONTROLS_PATH, "Install Plugins"], "",
+[IButton,  [StrMerge, $CONTROLS_PATH, "     Install Plugins"], "",
 	//[VarSet, file_path, [FileNameResolvePath, "PluginCompilerData\Create-Compile-Script.ahk"] ]	
 	//[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\test.ahk"] ]	
 	[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\PluginManager.ahk"] ]	
@@ -41,7 +41,7 @@
 	
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
 
-[IButton,  [StrMerge, $CONTROLS_PATH, "Reload Plugins"], "",
+[IButton,  [StrMerge, $CONTROLS_PATH, "     Reload Plugins"], "",
 	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
 	
 	[IPress, ZScript:Load]	

@@ -4,57 +4,57 @@
 */
 Class ScriptFileGenerator
 {
-	
+
 	file	:= ""
 	menu	:= ""
 	submenu	:= ""
 
 	ButtonGenerator := new ButtonGenerator(128, 48)
-	
+
 	__New( $file )
 	{
 		this.file := $file
 		;MsgBox,262144,, ScriptFileGenerator, 2
-		
+
 		;this.plugins.push("A", "B")
 
-		
+
 		;this._getPluginsInFolder()
-		
+
 		;this._installPlugins()
-		
+
 		;this._uninstallPlugins()
-		
+
 		;MsgBox,262144,, % this.plugins[1], 2
-		
+
 	}
-	
+
 	/**
 	 */
 	create()
 	{
 		FileDelete, % this.file
-		
+
 		this.writeMenu()
 		this.writeSubMenu()
 	}
-	
+
 	/**
 	 */
 	writeScriptLoadButton( $script_path )
 	{
 		SplitPath, $script_path, $script_name, $script_dir, $script_ext, $script_noext, $script_drive
 
-		$load_command := "[Note, ""Script " $script_name " will be reloaded""]"
+		$load_command := "[Note, "" RELOAD SCRIPT\n\n    " $script_name """,,1]"
 		$load_command .= "`n	[FileNameSetNext, """ $script_path """]"
 		$load_command .= "`n	[IPress, ZScript:Load]"
-		
+
 		$button := this.ButtonGenerator.create( this.menu ":" this.submenu ":" $script_noext, $load_command, "Reload " $script_name )
-		
-		
+
+
 		FileAppend, %$button%,	% this.file
 	}
-	
+
 	/**
 	 */
 	writeMenu()
@@ -62,7 +62,7 @@ Class ScriptFileGenerator
 		if( this.menu != "" )
 			FileAppend, % "`n[IPalette, """ this.menu """]",	% this.file
 	}
-	
+
 	/**
 	 */
 	writeSubMenu()

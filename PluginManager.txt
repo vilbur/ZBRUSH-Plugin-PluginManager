@@ -29,8 +29,9 @@
 
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
 
-[IButton,  [StrMerge, $CONTROLS_PATH, "     Reload Plugins"], "",
-	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]]
+[IButton,  [StrMerge, $CONTROLS_PATH, "     Reload Plugins"], "Create hardlinks for plugins from source folder to Zbrush. Create relaod button for each plugin in ~PluginManager:Load Plugins",
+	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]] // Reload-Plugins.txt CREATED IN:"./PluginManagerData/PluginManager.ahk"
 
 	[IPress, ZScript:Load]
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
+

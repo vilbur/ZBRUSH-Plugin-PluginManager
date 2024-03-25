@@ -2,7 +2,7 @@
 
 /** Generate button for Zscript
 */
-Class ButtonGenerator 
+Class ButtonGenerator
 {
 
 	__New( $width := "", $height := "" )
@@ -11,24 +11,24 @@ Class ButtonGenerator
 		this.height	:= $height
 		this.hotkey	:= ""
 		this.icon	:= ""
-		this.disabled	:= ""	
+		this.disabled	:= ""
 	}
-	
+
 	/**
 	 */
 	create( $name, $command, $tooltip := "", $hotkey := "", $disabled := "", $icon := ""  )
 	{
-		
+
 		if( $icon != "" )
 			$icon := " """ $icon """"
-		
-		
+
+
 		$button := "`n[IButton, """ $name """, """ $tooltip ""","
-		
+
 		$button .= "`n	" $command
-				
+
 		$button .= "`n, " $disabled ", " this.width ", " $hotkey ", " $icon ", " this.height " ]`n"
-		
+
 		return % $button
 	}
 }

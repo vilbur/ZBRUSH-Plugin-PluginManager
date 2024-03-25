@@ -1,8 +1,8 @@
 #SingleInstance force
 
-#Include %A_LineFile%\..\ScriptFileGenerator.ahk
-#Include %A_LineFile%\..\Plugin.ahk
-#Include %A_LineFile%\..\HardLinkCreator.ahk
+#Include %A_LineFile%\..\ScriptFileGenerator.ahk	;;; ./ScriptFileGenerator.ahk'
+#Include %A_LineFile%\..\Plugin.ahk	;;; ./Plugin.ahk'
+#Include %A_LineFile%\..\HardLinkCreator.ahk	;;; ./HardLinkCreator.ahk'
 
 /** Class PluginManager
 */
@@ -17,7 +17,9 @@ Class PluginManager
 
 	Plugins	:= []
 
+	/*
 
+	*/
 	__New( $plugins_source, $plugins_zbrush )
 	{
 		this.plugins_source := $plugins_source
@@ -72,7 +74,7 @@ Class PluginManager
 		MsgBox,262144, INSTALLED PLUGINS, %$installed_plugins%
 	}
 
-	/**
+	/** Loop folder and get each subfolder to plugin
 	 */
 	_getPluginsInFolder()
 	{

@@ -1,36 +1,36 @@
 /**
   *
   */
-[VarSet, $PLUGIN_NAME, 	"PluginManager"]
-//[VarSet, $PLUGIN_SUBMENU, 	"Run-Plugin"]
+[VarSet, PLUGINNAME, 	"PluginManager"]
+//[VarSet, PLUGINSUBMENU, 	"Run-Plugin"]
 
-[VarSet, $PLUGIN_NENU,	[StrMerge, "~", $PLUGIN_NAME ]]
+[VarSet, PLUGINNENU,	[StrMerge, "~", PLUGINNAME ]]
 
-[VarSet, $PLUGIN_DATA_PATH,	[FileNameResolvePath, [StrMerge, $PLUGIN_NAME, "Data" ]]]
-//[VarSet, $PLUGIN_DATA_PATH,	[FileNameResolvePath, [StrMerge,  $PLUGIN_NAME, "/", $PLUGIN_NAME, "Data" ]]]N
-
-
-//[VarSet, $CONTROLS_PATH,	"" ]	// DEV controls in script pane
-[VarSet, $CONTROLS_PATH,	[StrMerge, $PLUGIN_NENU, ":"]]	// MENU PATH: Menu > Control
-
-[VarSet, $ZFILE_UTILS_DLL, [StrMerge, $PLUGIN_DATA_PATH, "\\ZFileUtils64.dll"] ]
+[VarSet, PLUGINDATAPATH,	[FileNameResolvePath, [StrMerge, PLUGINNAME, "Data" ]]]
+//[VarSet, PLUGINDATAPATH,	[FileNameResolvePath, [StrMerge,  PLUGINNAME, "/", PLUGINNAME, "Data" ]]]N
 
 
-[IPalette, $PLUGIN_NENU ]
+//[VarSet, CONTROLSPATH,	"" ]	// DEV controls in script pane
+[VarSet, CONTROLSPATH,	[StrMerge, PLUGINNENU, ":"]]	// MENU PATH: Menu > Control
+
+[VarSet, ZFILEUTILSDLL, [StrMerge, PLUGINDATAPATH, "\\ZFileUtils64.dll"] ]
+
+
+[IPalette, PLUGINNENU ]
 
 
 
-[IButton,  [StrMerge, $CONTROLS_PATH, "     Install Plugins"], "",
+[IButton,  [StrMerge, CONTROLSPATH, "     Install Plugins"], "",
 
-	[VarSet, file_path, [StrMerge, $PLUGIN_DATA_PATH, "\PluginManager.ahk"] ]
-	[FileExecute, $ZFILE_UTILS_DLL, "LaunchAppWithFile",  #file_path]
+	[VarSet, filepath, [StrMerge, PLUGINDATAPATH, "\PluginManager.ahk"] ]
+	[FileExecute, ZFILEUTILSDLL, "LaunchAppWithFile",  #filepath]
 
 	[Sleep, 3]
 
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]
 
-[IButton,  [StrMerge, $CONTROLS_PATH, "     Reload Plugins"], "Create hardlinks for plugins from source folder to Zbrush. Create relaod button for each plugin in ~PluginManager:Load Plugins",
-	[FileNameSetNext, [FileNameResolvePath,"ZBRUSH_ZStartup\ZPlugs64\Reload-Plugins.txt"]] // Reload-Plugins.txt CREATED IN:"./PluginManagerData/PluginManager.ahk"
+[IButton,  [StrMerge, CONTROLSPATH, "     Reload Plugins"], "Create hardlinks for plugins from source folder to Zbrush. Create reload button for each plugin in ~PluginManager:Load Plugins",
+	[FileNameSetNext, [FileNameResolvePath,"ZBRUSHZStartup\ZPlugs64\Reload-Plugins.txt"]] // Reload-Plugins.txt CREATED IN:"./PluginManagerData/PluginManager.ahk"
 
 	[IPress, ZScript:Load]
 ,/*Disabled*/,128,/*Hotkey*/,/*Icon*/,64]

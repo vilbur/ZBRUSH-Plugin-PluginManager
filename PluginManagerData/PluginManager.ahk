@@ -1,10 +1,13 @@
 #SingleInstance force
 
-#Include %A_LineFile%\..\ScriptFileGenerator.ahk	;;; ./ScriptFileGenerator.ahk'
-#Include %A_LineFile%\..\Plugin.ahk	;;; ./Plugin.ahk'
-#Include %A_LineFile%\..\HardLinkCreator.ahk	;;; ./HardLinkCreator.ahk'
+#Include %A_LineFile%\..\Lib\ScriptFileGenerator.ahk	;;; ./ScriptFileGenerator.ahk'
+#Include %A_LineFile%\..\Lib\Plugin.ahk	;;; ./Plugin.ahk'
+#Include %A_LineFile%\..\Lib\HardLinkCreator.ahk	;;; ./HardLinkCreator.ahk'
 
 /** Class PluginManager
+  
+  
+  
 */
 Class PluginManager
 {
@@ -44,7 +47,7 @@ Class PluginManager
 			$Plugin.install(this.plugins_zbrush)
 	}
 
-	/** Create Hardlinks to Zbrush\Zplugs64
+	/** Create Hardlinks to Zbrush\Zplugs64n
 	 */
 	createReloadScript()
 	{
